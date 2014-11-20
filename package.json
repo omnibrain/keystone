@@ -17,6 +17,7 @@
     "csv": "~0.3.7",
     "embedly": "~1.0.2",
     "express": "~3.3.8",
+    "express-validator": "^2.7.0",
     "jade": "~1.7.0",
     "keystone-utils": "~0.1.12",
     "knox": "~0.9.1",
@@ -30,9 +31,9 @@
     "numeral": "~1.5.3",
     "queryfilter": "~0.0.4",
     "range_check": "~0.0.4",
+    "scmp": "~1.0.0",
     "semver": "~4.1.0",
-    "underscore": "~1.7.0",
-    "scmp": "~1.0.0"
+    "underscore": "~1.7.0"
   },
   "devDependencies": {
     "browserify": "~6.3.2",
