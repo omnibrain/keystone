@@ -45,6 +45,7 @@ block js
 		Keystone.list = { path: "#{list.path}" };
 		Keystone.item = { id: "#{item.id}" };
 		Keystone.wysiwyg = { options: !{JSON.stringify(wysiwygOptions)} };
+		Keystone.wysiwyg.options.additionalOptions.file_browser_callback = !{wysiwygOptions.additionalOptions.file_browser_callback};
 
 block intro
 	.item-toolbar.item-toolbar--header
@@ -84,6 +85,8 @@ block intro
 					| New #{list.singular}
 			
 block content
+	| <iframe id="form_target" name="form_target" style="display:none"></iframe>
+	| <form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden"><input name="image" type="file" onchange="$('#my_form').submit();this.value='';"></form>
 	form(method='post', enctype='multipart/form-data').item-details
 		
 		input(type='hidden', name='action', value='updateItem')
