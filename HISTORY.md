@@ -1,4 +1,219 @@
-# Keystone
+# KeystoneJS Changelog
+
+KeystoneJS is maintained by [@JedWatson](https://github.com/JedWatson) and an amazing team of contributors. All contributions are given credit here except for Jed's.
+
+## v0.3.10 / 2015-05-19
+
+* fixed; worked around an intermittent issue with the new browserify build process
+* added; new hooks `updates`, `signin` and `signout`, thanks [Camille Reynders](https://github.com/creynders)
+* added; `parseFormat` option for `Date` / `Datetime` field types, and more robust validation in `DateArray`
+* added; `logger options` setting, thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+
+Also, our site and documentation have been split out into their own repository: [keystonejs/keystonejs-site](https://github.com/keystonejs/keystonejs-site). Please contribute any changes, additions and issues to that new repo going forward.
+
+## v0.3.9 / 2015-05-17
+
+* added; Babel `object-assign` plugin for the Admin UI browserify build process
+* improved; The whole Admin UI JS build system has been rewritten and should now be completely stable and much faster than any previous setup. You can enable development mode with the `KEYSTONE_DEV=true` environment variable
+* fixed / changed; the LESS config api was changed with `less-middleware@2.0.0` and you should now just use the `less options` setting, thanks [Francesco Nero](https://github.com/francesconero). Old options will log warnings if you use them.
+* fixed; The path to `react-select`'s less file is now dynamically detected, see #1384
+* fixed; The `href` method of localfile/s shouldn't use `path.join`, see #1406
+* fixed; display issues with Type.GeoPoint and Type.Location, thanks [Al Connelly](https://github.com/WingedToaster)
+* added; SVG Support for Cloudinary Image fields, thanks [Christian Nolte](https://github.com/drlogout)
+* fixed; Disabled drag and drop sorting in list view when filters are applied, thanks [Michael](https://github.com/mldangelo)
+* improved; Now using [grappling-hook](https://github.com/keystonejs/grappling-hook), thanks [Camille Reynders](https://github.com/creynders)
+* improved; The Location field throws an error if `googleLookup` fails, thanks [Daniel Cousens](https://github.com/dcousens)
+* fixed; issues with schema inheritance and schemaPlugins, thanks [Robert Clark](https://github.com/lojack)
+* fixed; default `formatString` for Datetime fields now includes `h:m:s a`, thanks [Al Connelly](https://github.com/WingedToaster)
+* fixed; `Keystone.prototype.static(app)` was removed in 0.3.7, has been reintroduced for backwards-compatibility
+* changed; `react-alt-text` is now its own npm package
+* changed; The Admin UI is being consolidated into `/admin` and many files have moved, thanks to [Milos Dakic](https://github.com/milosdakic) for helping with this.
+
+Also in this release: Keystone is completely free of ESLint warnings thanks to the incredible efforts of [Camille Reynders](https://github.com/creynders) and [Jed Watson](https://github.com/JedWatson).
+
+
+## v0.3.8 / 2015-04-23
+
+* fixed; worked around a breaking issue with the `bytes` package by downgrading it and including it in the pre-built Admin UI packages bundle
+
+## v0.3.7 / 2015-04-23
+
+* changed; switched from pre-built admin scripts to pre-built browserify packages and on-demand admin UI scripts w/ browserify-middleware
+* fixed; TinyMCE image upload fail due to "Bad response", thanks [Alberto Gasparin](https://github.com/albertogasparin)
+* fixed; case-insensitive user lookup in .session.signin(), thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+* fixed; Reloading tinyMCE if dependencies matches dependsOn, thanks [Christian Nolte](https://github.com/drlogout)
+
+## v0.3.6 / 2015-04-14
+
+* fixed; `list.schema.path("field")` would not return the field schema before the List had been registered
+* fixed; `evalDependsOn` not working correctly with `Boolean` field types
+* fixed; whitespaces issues in the Admin UI LESS file
+
+## v0.3.5 / 2015-04-12
+
+* changed; Switched from SJCS to ESLint for project linting and style checking
+* changed; Item data is now loaded via JSON API in the Admin UI, fixes escaping edge-case issues and paves the way forward
+* added; List history feature for tracking document revisions
+* added; Schema inheritance for lists, thanks [Robert Clark](https://github.com/lojack)
+* added; yearRange option for Date fields, thanks [Robert Clark](https://github.com/lojack)
+* fixed; intermittend ordering issues with Relationship fields, thanks [Robert Clark](https://github.com/lojack)
+* added; `format` option for Url fields to prevent stripping http/https, thanks [Daniel Zurawski](https://github.com/danielzurawski)
+* added; color preview in list view, thanks [Teemu Sirkiä](https://github.com/ttsirkia)
+* added; ability to add mandrill template content, thanks [Brett Newman](https://github.com/snowkeeper)
+* added; original file name is saved for AWS uploads, thanks [Subash Pathak](https://github.com/Subash)
+* fixed; `wysiwyg cloudinary images` key is no longer required to be global, can be set per-field, thanks [Alberto Gasparin](https://github.com/albertogasparin)
+* fixed; refactored `doSignin()`, now exposed as `keystone.session.signinWithUser()`, thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+* fixed; Use filename without suffix as default publicID for cloudinary, thanks [@aschwersenz](https://github.com/aschwersenz)
+* added; support for custom headers in S3 File Fields, thanks [Chris Montoro](https://github.com/montmanu)
+* added; currency option for the Money field, thanks [@douglasf](https://github.com/douglasf)
+* fixed; markdown field collapse behaviour, thanks [Pat Cavit](https://github.com/tivac)
+* fixed; wysiwyg & file field collapse behaviour, thanks [Robert Clark](https://github.com/lojack)
+* fixed; scripts are no longer minified in dev mode
+
+## v0.3.4 / 2015-03-10
+
+* fixed; missing less variable for react-select was breaking the less>css build, thanks everyone involved and [esparragito](https://github.com/esparragito) for the fix
+* fixed; the missing line numbers in CodeMirror are back again, thanks [Carlos Colon](https://github.com/webteckie)
+
+## v0.3.3 / 2015-03-08
+
+* added; new DateArray field type, thanks [Liam Wooding](https://github.com/liamwooding)
+* added; new `editor Object` config option for Code fields, thanks [Pat Cavit](https://github.com/tivac)
+* added; new `wysiwyg Object` config option for Html fields, thanks [Pat Cavit](https://github.com/tivac)
+* changed; limits lifted for relationship autocomplete results
+* changed; makefile deprecated in favor of npm scripts, thanks [Pat Cavit](https://github.com/tivac)
+* changed; asyncdi updated and moved into its own npm package, fixes thanks to [Camille Reynders](https://github.com/creynders)
+* fixed; collapse logic for relationship (many: true) and Array-type fields, thanks [Pat Cavit](https://github.com/tivac)
+* fixed; Rendering of uneditable relationship fields, thanks [Camille Reynders](https://github.com/creynders)
+* fixed; OpenShift deployment issues, thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+* fixed; item name rendering issues in Admin UI / Edit view, thanks [Camille Reynders](https://github.com/creynders)
+* fixed; LocalFile field issues, thanks [Camille Reynders](https://github.com/creynders)
+* fixed; Markdown field collapse logic and other UI issues, thanks [Pat Cavit](https://github.com/tivac)
+* fixed; validation override error in UndateHandler, thanks [douglasf](https://github.com/douglasf)
+* fixed; validation logic issues with Number fields
+
+## v0.3.2 / 2015-02-27
+
+* added; new Geopoint field type, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* added; lots of server-side field type unit tests
+* added; `frame guard` option, thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+* added; objects with IDs like `{ id: ObjectId }` can now be provided as Relationship values in data to `keystone.createItems(data, options, callback)`
+* added; `options.refs` can be provided as an option to `keystone.createItems(data, options, callback)`
+* added; focus issues with the WYSIWIG Html and Code fields
+* changed; `lang` option because `language` for the `Code` field type as per the 0.3.x docs
+* changed; Code fields are now allowed to be initial fields
+* updated; TinyMCE to 4.1.7
+* updated; Many packages, see [e561fa6](https://github.com/keystonejs/keystone/commit/e561fa6c32a059f847283e98e2ecc95255829056)
+* fixed; issues with the `ipRangeRestrict` option, thanks [Johnny Estilles](https://github.com/JohnnyEstilles)
+* fixed; relationship reorder is persisted even when the linked IDs haven't changed, thanks [Robert Clark](https://github.com/lojack)
+* fixed; check for existence req.user on DELETE action, thanks [Josh Lasdin](https://github.com/joshlasdin)
+* fixed; `updatedAt`, `updatedBy`, `createdAt` and `createdBy` are no longer set on create w/ tracking if already set, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* fixed; bug with the datepicker that caused an infinite loop in some timezones
+* fixed; bug in deprecation warning helper, thanks [Nicolas Dutil](https://github.com/nicdutil)
+
+## v0.3.1 / 2015-02-13
+
+* fixed; validation and updating issues with Number, Money, TextArray and NumberArray Fields
+* fixed; slightly broken regex for resource redirection, thanks [Nicolas Dutil](https://github.com/nicdutil)
+* fixed; the S3File field now surfaces errors correctly, thanks [Harry Moreno](https://github.com/morenoh149)
+* changed; `keystone.connect` was broken in 0.3.0, it has been replaced by the `keystone.set('express', ...)` and `keystone.set('mongoose', ...)` options
+
+Also more tests and general cleanup. Thanks especially to [Sebastian McKenzie](https://github.com/sebmck) and [Johnny Estilles](https://github.com/JohnnyEstilles) for their work on this release.
+
+## v0.3.0 / 2015-02-06
+
+This is a major new version of KeystoneJS. The changes are too many to simply enumerate here, however we've done our best to ensure compatibility and feature parity with 0.2.x. If you experience any unexpected issues or behaviours, please let us know by opening a [Github Issue](https://github.com/keystonejs/keystone/issues).
+
+For notes regarding breaking changes in the release, please see our [0.2.x to 0.3.x Changes wiki page](https://github.com/keystonejs/keystone/wiki/0.2.x-to-0.3.x-Changes).
+
+Thanks to [all our contributors](https://github.com/keystonejs/keystone/graphs/contributors) for the huge amount of effort that went into this release, and the ongoing work designing, programming, testing and documenting KeystoneJS.
+
+### Updated Express to 4.0
+
+Express 4 included several breaking changes from Express 3. Keystone simplifies most of these changes, and if you're using `keystone.start()` to initialise your web server things will _probably just work_; however the more complicated your app, the more likely you will need to take these changes into account. Please review the [Moving to Express 4 Guide](http://expressjs.com/guide/migrating-4.html) for more information.
+
+### Admin UI forms rewritten in React.js
+
+The Admin UI forms have been rebuilt from the ground up with React.js. This is part of a larger, ongoing effort to move the Admin UI entirely towards a rich, customisable single page web app.
+
+The UI has been cleaned up and improved, and the field types should support the same features and behaviours as in 0.2.x. If any field types or features don't continue to work as expected, please open a [GitHub Issue](https://github.com/keystonejs/keystone/issues) so we can fix it!
+
+
+## v0.2.42 / 2015-01-20
+
+* fixed; backwards-compatibility issues with older versions of connect-mongo
+* fixed; file type / mimetype issues with S3File / AzureFile and LocalFile fields
+
+## v0.2.41 / 2015-01-18
+
+* fixed; issues relating to using mongo and redis as session stores
+* added; option to use the `importcss` plugin for TinyMCE; set `wysiwyg importcss`, thanks [aschwersenz](https://github.com/aschwersenz)
+* added; `MONGODB_URL` environment variable support, thanks [jdr0dn3y](https://github.com/jdr0dn3y)
+
+## v0.2.40 / 2014-12-31
+
+* fixed; issue setting `Boolean` fields to `false` in the Admin UI
+* added; `cors` middleware is now available as `Keystone.cors`
+* fixed; redis session middleware doesn't support callbacks, should now initialise correctly
+* fixed; issues parsing options in keystone.Email, thanks [Brett Newman](https://github.com/snowkeeper)
+
+
+## v0.2.39 / 2014-12-20
+
+* fixed; regression in the Admin UI introduced in 0.2.37, sorry!
+
+## v0.2.38 / 2014-12-19
+
+* fixed; a bug where location field filters were not being applied in the Admin UI
+* fixed; a bug where boolean field filters were not being applied in the Admin UI
+
+## v0.2.37 / 2014-12-19
+
+* added; check for refsLookup existence to core/createItem, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* added; dump current list key and data onto createItems error, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* added; ability to bypass bcrypt hashing for password fields when required
+* added; SSL CA configuration option, thanks [Brett Newman](https://github.com/snowkeeper)
+* added; `static options` option to control static middleware configuration, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* fixed; error thrown in the Admin UI when no user model is available
+* fixed; handle undefined boolean update values, thanks [Carlos Colon](https://github.com/webteckie)
+* fixed; logging error for misconfigured Embedly fields
+* fixed; mimetype bug in S3 file field, thanks [Harry Moreno](https://github.com/morenoh149)
+* updated; multilanguage docs and new site architecture
+* improved; password field validation now in UpdateHandler
+
+Huge thanks to [@wuhaixing](https://github.com/wuhaixing) for the Chinese translation in this release.
+
+## v0.2.36 / 2014-12-07
+
+* fixed; several issues with the `localfile` field type
+* improved; `localfile.options.format` is called with the `field` context
+* improved; `localfile.href` is now available as a virtual
+* improved; switched to `fs-extra` so missing paths for `localfile` uploads will be created automatically
+* improved; `localfiles` field type has been completely overhauled, now in line with `localfile` and supports `prefix` and `format` options
+* removed; the autodetection of image file types in the `localfiles` field has been removed, use the `format` option instead (like `localfile`)
+* fixed; admin UI template caching bug, may help improve Admin UI performance
+* fixed; `callback` is now correctly optional in `keystone.Email.send()`, thanks [Brett Newman](https://github.com/snowkeeper)
+* improved; a `ReferenceError` is now thrown when an invalid list is requested with `keystone.list`, thanks [Sebastian McKenzie](https://github.com/sebmck)
+
+## v0.2.35 / 2014-12-02
+
+*This release fixes an issue in the Admin UI introduced in 0.2.34, our sincere apologies to anyone who was affected by this!*
+
+* fixed; an issue to do with admin links introduced by the new custom nav functionality, thanks [Camille Reynders](https://github.com/creynders)
+
+## v0.2.34 / 2014-11-29
+
+* added; ability to specify custom navigation items in the header menu, thanks [Camille Reynders](https://github.com/creynders)
+* added; ability to specify multiple values for a dependsOn field with an Array, thanks [Brett Newman](https://github.com/snowkeeper)
+* improved; more dynamic import extensions, thanks [Sebastian McKenzie](https://github.com/sebmck)
+* fixed; several issues relating to validation in the UpdateHandler
+* fixed; issues deleting users, thanks [Ignacio Lago](https://github.com/ignlg)
+* fixed; potential issues comparing csrf and password tokens, thanks [Mickael van der Beek](https://github.com/Mickael-van-der-Beek)
+* fixed; incorrect whitespace in UI when ordering lists, thanks [Tiago Martins](https://github.com/Gank)
+* fixed; callback in Email class is now correctly optional, thanks [Ignacio Lago](https://github.com/ignlg)
+* fixed; UI inconsistencies when deleting items, thanks [Ignacio Lago](https://github.com/ignlg)
+* fixed; date formatting issues with tracking meta, thanks [Jacques Lareau](https://github.com/jacqueslareau)
+
 
 ## v0.2.33 / 2014-11-04
 
@@ -142,7 +357,7 @@ Because of the way **npm** resolved paths, if you are using Keystone in developm
 
 * added; recent searches UI and functionality in the Admin UI, thanks [Benjamin Lupton](https://github.com/balupton)
 * fixed; strict type checking for field.options.required, see #393
-* added; `CloudinaryImage.updateItem()` allows updates from data, thanks [webteckie](https://github.com/webteckie)
+* added; `CloudinaryImage.updateItem()` allows updates from data, thanks [Carlos Colon](https://github.com/webteckie)
 * added; native support for node-sass via the `sass` option, make sure you include `node-sass` in your project dependencies to use it. thanks [Fabrizio Fortunato](https://github.com/izifortune)
 * fixed; field validation methods for location & password fields
 * fixed; `keystone.createItems()` now creates items in series, not parallel
